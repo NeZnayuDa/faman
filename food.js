@@ -67,8 +67,8 @@ let fastFood = [
     }
 ]
 
-
-let container = document.querySelector('.niznav .s12');
+// --- Categories ---
+let categoryContainer = document.querySelector('.niznav .s12');
 
 fastFood[0].categories.forEach(item => {
     let card = document.createElement('div');
@@ -83,5 +83,37 @@ fastFood[0].categories.forEach(item => {
         </div>
     `;
 
-    container.appendChild(card);
+    categoryContainer.appendChild(card);
+});
+
+
+// --- Products ---
+let productContainer = document.querySelector('.fast');
+
+fastFood[0].products.forEach(item => {
+
+    let newPrice = item.price - (item.price * item.discountInPercentage / 100);
+
+    let card = document.createElement('div');
+    card.classList.add('card');
+
+    card.innerHTML = `
+        <div class="card-img">
+            <img src="${item.poster}" alt="">
+            <div class="discount">${item.discountInPercentage}%</div>
+        </div>
+
+        <div class="card-body">
+            <div class="rating">⭐ ${item.rating} <span>| +100 review</span></div>
+            <h3>${item.productName}</h3>
+            <p>${item.description}</p>
+
+            <div class="price">
+                <span class="old">$${item.price.toFixed(2)}</span>
+                <span class="new">$${newPrice.toFixed(2)}</span>
+            </div>
+        </div>
+    `;
+
+    productContainer.appendChild(card);
 });
