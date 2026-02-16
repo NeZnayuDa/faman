@@ -67,8 +67,8 @@ let fastFood = [
     }
 ]
 
-// --- Categories ---
 let categoryContainer = document.querySelector('.niznav .s12');
+
 
 fastFood[0].categories.forEach(item => {
     let card = document.createElement('div');
@@ -86,8 +86,18 @@ fastFood[0].categories.forEach(item => {
     categoryContainer.appendChild(card);
 });
 
+const totalCategoryPrice = fastFood[0].categories.reduce((sum, item) => sum + item.categoriyPrice, 0);
+const allP = document.querySelectorAll('p');
+if (allP.length > 0) {
+    for (let p of allP) {
+        if (p.textContent.trim() === '') {
+            p.textContent = `Sum of all  products: $${totalCategoryPrice}`;
+            break;
+        }
+    }
+}
 
-// --- Products ---
+
 let productContainer = document.querySelector('.fast');
 
 fastFood[0].products.forEach(item => {
